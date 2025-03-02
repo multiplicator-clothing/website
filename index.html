@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <title>Multiplicator - Clothing for Cash Multiplying Machines</title>
+  <style>
+    /* Reset & Global Box Sizing */
+    * {
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Montserrat', Arial, sans-serif;
+      overflow: hidden;
+      position: relative;
+      background-color: #000;
+      color: #fff;
+    }
+
+    /***********************************************
+      BACKGROUND - shifting gradient + radial pulse
+    ***********************************************/
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(120deg, #000, #111, #222, #111);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+    }
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      25%  { background-position: 50% 50%; }
+      50%  { background-position: 100% 50%; }
+      75%  { background-position: 50% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Gold radial pulse */
+    body::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle at center, rgba(255,215,0,0.15), transparent 70%);
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      animation: pulse 8s infinite alternate;
+      z-index: 0;
+    }
+    @keyframes pulse {
+      0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0.2;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.4;
+      }
+    }
+
+    /*************************
+      MAIN CONTENT CONTAINER
+    *************************/
+    .container {
+      position: relative; 
+      z-index: 1;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 3rem 2rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      box-shadow: 0 8px 32px rgba(255, 215, 0, 0.2);
+      animation: fadeIn 1.5s ease forwards;
+      opacity: 0;
+      max-width: 800px;
+      width: 90%;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-gap: 2rem;
+      justify-items: center;
+    }
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Logo styling */
+    .logo-container {
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    
+    .logo {
+      width: 180px;
+      height: auto;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6));
+    }
+
+    /* Brand name */
+    .brand-name {
+      color: #FFD700;
+      font-size: 3.5rem;
+      font-weight: 900;
+      letter-spacing: 3px;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+    }
+
+    /* Tagline */
+    .tagline {
+      color: #fff;
+      font-size: 1.4rem;
+      margin-bottom: 2rem;
+      font-weight: 300;
+      font-style: italic;
+    }
+
+    /* Catchy Quote */
+    .quote-container {
+      margin: 2rem 0;
+      position: relative;
+      padding: 1.5rem;
+      border-left: 4px solid #FFD700;
+      background: rgba(0, 0, 0, 0.4);
+      text-align: left;
+      max-width: 600px;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    .quote {
+      font-size: 1.5rem;
+      color: #fff;
+      line-height: 1.6;
+      font-weight: 300;
+    }
+    
+    .quote-author {
+      margin-top: 1rem;
+      text-align: right;
+      color: #FFD700;
+      font-weight: 500;
+    }
+
+    /* Coming Soon Message */
+    .coming-soon {
+      text-transform: uppercase;
+      font-size: 2rem;
+      color: #FFD700;
+      letter-spacing: 6px;
+      font-weight: 800;
+      animation: glow 2s ease-in-out infinite alternate;
+      padding: 1rem 2rem;
+      border: 2px solid rgba(255, 215, 0, 0.3);
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.3);
+      transition: all 0.5s ease;
+      width: fit-content;
+    }
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+        box-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+      }
+      to {
+        text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+      }
+    }
+
+    /* Socials container */
+    .socials {
+      margin-top: 3rem;
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+    }
+    
+    .social-icon {
+      background-color: transparent;
+      border: 2px solid #FFD700;
+      color: #FFD700;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      text-decoration: none;
+      font-size: 1.2rem;
+      overflow: hidden;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .social-icon i {
+      position: relative;
+      z-index: 2;
+      transition: transform 0.3s ease;
+    }
+    
+    .social-icon::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #FFD700;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+      z-index: 1;
+    }
+    
+    .social-icon:hover::before {
+      transform: translateY(0);
+    }
+    
+    .social-icon:hover i {
+      color: #000;
+      transform: scale(1.2);
+    }
+
+    /***************************
+      CONTACT BUTTON (fixed)
+    ****************************/
+    .contact-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #FFD700;
+      color: #000;
+      padding: 0.8rem 1.2rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4);
+      transition: all 0.3s;
+      z-index: 2;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .contact-button span {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .contact-button::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: #FFF;
+      transition: all 0.4s;
+      z-index: 1;
+    }
+    
+    .contact-button:hover::after {
+      left: 0;
+    }
+    
+    .contact-button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(255, 215, 0, 0.6);
+    }
+
+    /* Grid layout for main sections */
+    .logo-container {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+    
+    .quote-section {
+      grid-column: 1 / -1;
+      width: 100%;
+    }
+    
+    .cta-section {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-gap: 2rem;
+      width: 100%;
+      justify-items: center;
+    }
+    
+    /* Responsive scaling */
+    @media (max-width: 768px) {
+      .container {
+        grid-gap: 1.5rem;
+        padding: 2.5rem 1.5rem;
+      }
+      
+      .brand-name {
+        font-size: 2.5rem;
+      }
+      .tagline {
+        font-size: 1.1rem;
+      }
+      .quote {
+        font-size: 1.2rem;
+        line-height: 1.6;
+      }
+      .coming-soon {
+        font-size: 1.5rem;
+        letter-spacing: 4px;
+        padding: 0.8rem 1.5rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .container {
+        padding: 2rem 1rem;
+        grid-gap: 1.2rem;
+      }
+      .brand-name {
+        font-size: 1.8rem;
+      }
+      .logo {
+        width: 120px;
+      }
+      .social-icon {
+        width: 40px;
+        height: 40px;
+      }
+      .quote-container {
+        padding: 1rem;
+      }
+      .quote {
+        font-size: 1.1rem;
+        line-height: 1.5;
+      }
+      .coming-soon {
+        font-size: 1.3rem;
+        padding: 0.6rem 1.2rem;
+      }
+    }
+  </style>
+  <!-- Font Awesome for social icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Main container -->
+  <div class="container">
+    <!-- Logo and brand info -->
+    <div class="logo-container">
+      <img src="/api/placeholder/400/320" alt="Multiplicator Logo" class="logo" />
+      <h1 class="brand-name">Multiplicator</h1>
+      <p class="tagline">All clothing for cash multiplying machines</p>
+    </div>
+    
+    <!-- Catchy quote -->
+    <div class="quote-container">
+      <p class="quote">"Dress like money is your mission. Your style is the investment, our clothing is the return."</p>
+      <p class="quote-author">- The Multiplicator Team</p>
+    </div>
+    
+    <!-- Coming soon message -->
+    <div class="coming-soon">Coming Soon</div>
+    
+    <!-- Social media icons with fancy hover effects -->
+    <div class="socials">
+      <a href="#" class="social-icon">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="#" class="social-icon">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="#" class="social-icon">
+        <i class="fab fa-tiktok"></i>
+      </a>
+      <a href="#" class="social-icon">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Contact button with sliding effect -->
+  <a href="mailto:contact@multiplicator.com" class="contact-button">
+    <span>Contact Us</span>
+  </a>
+
+  <script>
+    // JavaScript for additional fancy effects
+    document.addEventListener('DOMContentLoaded', function() {
+      // Animated entrance for social icons with staggered delay
+      const socialIcons = document.querySelectorAll('.social-icon');
+      socialIcons.forEach((icon, index) => {
+        icon.style.opacity = '0';
+        icon.style.transform = 'translateY(20px)';
+        icon.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        
+        setTimeout(() => {
+          icon.style.opacity = '1';
+          icon.style.transform = 'translateY(0)';
+        }, index * 150 + 1800);
+      });
+      
+      // Fluid animation for the quote
+      const quote = document.querySelector('.quote');
+      const originalText = quote.innerText;
+      quote.innerText = '';
+      quote.style.opacity = '1';
+      
+      // Create wrapper spans for each word for smooth animation
+      const words = originalText.split(' ');
+      words.forEach((word, index) => {
+        const wordSpan = document.createElement('span');
+        wordSpan.classList.add('quote-word');
+        wordSpan.style.opacity = '0';
+        wordSpan.style.transform = 'translateY(10px)';
+        wordSpan.style.transition = 'all 0.4s ease';
+        wordSpan.style.display = 'inline-block';
+        wordSpan.style.marginRight = '8px';
+        wordSpan.textContent = word;
+        
+        quote.appendChild(wordSpan);
+        
+        setTimeout(() => {
+          wordSpan.style.opacity = '1';
+          wordSpan.style.transform = 'translateY(0)';
+        }, index * 80 + 800);
+      });
+      
+      // Enhanced cursor hover effect on container
+      const container = document.querySelector('.container');
+      container.addEventListener('mousemove', (e) => {
+        const rect = container.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const xPercent = x / rect.width;
+        const yPercent = y / rect.height;
+        
+        // More subtle, natural shadow movement
+        container.style.boxShadow = `${xPercent * 15 - 7.5}px ${yPercent * 15 - 7.5}px 30px rgba(255, 215, 0, 0.15)`;
+        
+        // Add subtle gradient tilt effect
+        container.style.background = `radial-gradient(circle at ${xPercent * 100}% ${yPercent * 100}%, rgba(30, 30, 30, 0.7), rgba(0, 0, 0, 0.7))`;
+      });
+      
+      container.addEventListener('mouseleave', () => {
+        container.style.boxShadow = '0 8px 32px rgba(255, 215, 0, 0.2)';
+        container.style.background = 'rgba(0, 0, 0, 0.6)';
+      });
+      
+      // Pulse animation for the coming soon text
+      const comingSoon = document.querySelector('.coming-soon');
+      setInterval(() => {
+        comingSoon.style.transform = 'scale(1.05)';
+        comingSoon.style.transition = 'transform 1s ease';
+        
+        setTimeout(() => {
+          comingSoon.style.transform = 'scale(1)';
+        }, 500);
+      }, 3000);
+    });
+  </script>
+</body>
+</html>
